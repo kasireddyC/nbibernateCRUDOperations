@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Castle.MicroKernel.Registration;
+using Castle.Windsor;
 using System.Windows;
 
 namespace WpfApplication1
@@ -13,5 +9,14 @@ namespace WpfApplication1
     /// </summary>
     public partial class App : Application
     {
+        public static readonly WindsorContainer container = new WindsorContainer();
+        public App()
+        {
+            RegisterComponents();
+        }
+        private void RegisterComponents()
+        {
+            container.Register(Component.For<IContactDAO>().ImplementedBy<ContactDAO>());
+        }
     }
 }
